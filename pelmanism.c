@@ -1,1 +1,5 @@
-このファイルに書いていこう
+#include <stdio.h>
+
+int main(){
+	
+}
