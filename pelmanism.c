@@ -9,19 +9,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-void shuffle(int[],int);
+void shuffle(int[],int,unsigned int);
 
 int main(){
 	int card[10] = {1,1,2,2,3,3,4,4,5,5};
 	int hit[10]  = {0,0,0,0,0,0,0,0,0,0};
 	char block[] = "■";
-
 	int firstNum;
 	int secondNum;
+	// seed値を入力してもらう
+	printf("好きな数字を半角で入力してください(何桁でもOK)\n");
+	int seed;
+	scanf("%d",&seed);
 
 	//カードシャッフル
-	shuffle(card,10);
+	shuffle(card,10,seed);
 	//count関数がないので、sizeofから取得
 	int cardCnt = sizeof(card) / (sizeof(int));
 	
@@ -83,8 +87,10 @@ int main(){
 	Fisher–Yatesシャッフルアルゴルズム
 	配列の要素をランダムシャッフルする
 */
-void shuffle(int ary[],int size)
+void shuffle(int ary[],int size,unsigned int seed)
 {
+	// 時間を取得して、rand()関数のseed値を設定
+	srand(seed);
     for(int i=0;i<size;i++)
     {
         int j = rand()%size;
