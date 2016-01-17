@@ -59,16 +59,24 @@ int main(){
 			}
 		}
 		printf("\n\n");
-
+		int isAllCorrect = 0;
 		if(card[firstNum] == card[secondNum]){
 			//配列削除すると、indexを詰めたり面倒なので、当たった番号を記録
 			hit[firstNum]  = 1;
 			hit[secondNum] = 1;
 			printf("当たり！\n\n");
+			for(int i = 0;i<10;i++){
+				isAllCorrect = isAllCorrect + hit[i];
+			}
+			if(isAllCorrect == 10){
+				printf("オールクリア！おめでとう！\n");
+				break;
+			}
 		}else{
 			printf("はずれ！\n\n");
 		}
 	}
+	printf("また遊んでね！\n");
 }
 
 /*
