@@ -11,7 +11,6 @@
 #include <string.h>
 
 void shuffle(int[],int);
-void eraseAttr(int[],int);
 
 int main(){
 	int card[10] = {1,1,2,2,3,3,4,4,5,5};
