@@ -11,14 +11,11 @@
 #include <string.h>
 
 void shuffle(int[],int);
-
+void eraseAttr(int[],int);
 
 int main(){
 	int card[10] = {1,1,2,2,3,3,4,4,5,5};
-	//配列削除かなりめんどそう。。
-	//宣言して当たり判定したけどできてない
-	int hit[5];
-
+	int hit[10]  = {0,0,0,0,0,0,0,0,0,0};
 	char block[] = "■";
 
 	int firstNum;
@@ -27,23 +24,27 @@ int main(){
 	//カードシャッフル
 	shuffle(card,10);
 	//count関数がないので、sizeofから取得
-	int count = sizeof(card) / (sizeof(int));
+	int cardCnt = sizeof(card) / (sizeof(int));
 	
 	//無限ループ
 	for(int j = 1;;j++){
-
+		printf("----------------------------------------------------------------------------\n\n");
 		printf("%d回目 : 好きなカードを選んでください(左から数字0,1,2,3,4,5,6,7,8,9に対応しています。\n\n",j);
 		
-		for(int i=0;i < count;i++){
-			printf("%s ",block);
+		for(int i=0;i < cardCnt;i++){
+			if(hit[i] == 0){
+				printf("%s ", block);
+			} else {
+				printf("%d ", card[i]);
+			}
 		}
 
 		printf("\n\n");
 		scanf("%d",&firstNum);
 		printf("もう一つ選んでください\n");
 		scanf("%d",&secondNum);
-		printf("%d\n",count);
-		for(int i=0;i < count;i++ ){
+		// printf("%d\n",cardCnt);
+		for(int i=0;i < cardCnt;i++ ){
 			if(i == firstNum || i == secondNum){
 				if(i == firstNum){
 					printf("%d ",card[firstNum]);
@@ -51,15 +52,19 @@ int main(){
 					printf("%d ",card[secondNum]);
 				}
 			}else{
-				printf("%s ", block);
+				if(hit[i] == 0){
+					printf("%s ", block);
+				}else{
+					printf("%d ", card[i]);
+				}
 			}
 		}
 		printf("\n\n");
 
-		//当たりの場合
 		if(card[firstNum] == card[secondNum]){
 			//配列削除すると、indexを詰めたり面倒なので、当たった番号を記録
-			hit[card[firstNum]] = card[firstNum];
+			hit[firstNum]  = 1;
+			hit[secondNum] = 1;
 			printf("当たり！\n\n");
 		}else{
 			printf("はずれ！\n\n");
